@@ -13,7 +13,6 @@ class GameBoardController: UIViewController {
     var isPlayerOne = true
 
     var ticTacToeState = [[State]]()
-
     enum State {
         case Empty
         case PlayerOne
@@ -36,9 +35,19 @@ class GameBoardController: UIViewController {
         }
         setupResetButton()
         resetGameState()
+        setupGameTitleLabel()
+    }
+
+    var gameTitleLabel: UILabel?
+
+    func setupGameTitleLabel() {
+        let frame = CGRect(x: 100, y: 70, width: 200, height: 30)
+        gameTitleLabel = UILabel(frame: frame)
+        view.addSubview(gameTitleLabel!)
     }
 
     func resetGameState() {
+        ticTacToeState.removeAll()
         for _ in 0..<3 {
             let row = Array(count: 3, repeatedValue: State.Empty)
             ticTacToeState.append(row)
@@ -59,16 +68,21 @@ class GameBoardController: UIViewController {
 
     func handleResetButton(resetButton: UIButton) {
         // reset all the colors... let's make a function that reset all the button colors to blue except the resetbutton itself
-        resetAllButtons()
+        isPlayerOne = true
+        resetAllButtons(color: true, shouldEnableButton: true)
+        resetGameState()
+        gameTitleLabel?.text = "Let's Play!!!"
     }
 
-    func resetAllButtons() {
+    func resetAllButtons(color resetColor: Bool, shouldEnableButton: Bool) {
         for v in view.subviews {
             if let button = v as? UIButton {
                 if let title = button.currentTitle {
                     if title != resetButtonName {
-                        button.backgroundColor = .blueColor()
-                        button.enabled = true
+                        if resetColor {
+                            button.backgroundColor = .blueColor()
+                        }
+                        button.enabled = shouldEnableButton
                     }
                 }
             }
@@ -128,23 +142,116 @@ class GameBoardController: UIViewController {
     func checkForWinner() {
         // possible way of winning the game
         // 1) 3 of the same item in the same row
-        checkAllRowWinner()
+        var winnerName: String?
+        if let winner = checkAllRowWinner() {
+            if winner == .PlayerOne {
+                winnerName = "Winner: Player One"
+            } else {
+                winnerName = "Winner: Player Two"
+            }
+        }
         // 2) 3 of the same item in the same col
-        checkAllColWinner()
+        if let winner = checkAllColWinner() {
+            if winner == .PlayerOne {
+                winnerName = "Winner: Player One"
+            } else {
+                winnerName = "Winner: Player Two"
+            }
+        }
         // 3) 3 of the same item in diagonal
-        checkAllDiagonalWinner()
-
+        if let winner = checkAllDiagonalWinner() {
+            if winner == .PlayerOne {
+                winnerName = "Winner: Player One"
+            } else {
+                winnerName = "Winner: Player Two"
+            }
+        }
+        if let player = winnerName {
+            gameTitleLabel?.text = player
+            resetAllButtons(color: false, shouldEnableButton: false)
+        }
     }
 
-    func checkAllRowWinner() {
-
+    func checkAllRowWinner() -> State? {
+        for row in 0..<3 {
+            var rowStates = [State]()
+            for col in 0..<3 {
+                if ticTacToeState[row][col] == .PlayerOne {
+                    rowStates.append(.PlayerOne)
+                } else if ticTacToeState[row][col] == .PlayerTwo {
+                    rowStates.append(.PlayerTwo)
+                } else {
+                    rowStates.append(.Empty)
+                }
+            }
+            guard let playerWinner = checkArrWinner(rowStates) else { continue }
+            return playerWinner
+        }
+        return nil
     }
 
-    func checkAllColWinner() {
-
+    func checkArrWinner(arr: [State]) -> State? {
+        let winnerArray = Array(Set(arr))
+        if winnerArray.count == 1 {
+            if winnerArray.first == .PlayerOne {
+                return .PlayerOne
+            } else if winnerArray.first == .PlayerTwo {
+                return .PlayerTwo
+            } else {
+                return nil
+            }
+        }
+        return nil
     }
 
-    func checkAllDiagonalWinner() {
+
+    func checkAllColWinner() -> State? {
+        for col in 0..<3 {
+            var colStates = [State]()
+            for row in 0..<3 {
+                if ticTacToeState[row][col] == .PlayerOne {
+                    colStates.append(.PlayerOne)
+                } else if ticTacToeState[row][col] == . PlayerTwo {
+                    colStates.append(.PlayerTwo)
+                } else {
+                    colStates.append(.Empty)
+                }
+            }
+            guard let colWinner = checkArrWinner(colStates) else { continue }
+            return colWinner
+        }
+        return nil
+    }
+
+    func checkAllDiagonalWinner() -> State? {
+        var fowardDiagonalWinner = [State]()
+        for row in 0..<3 {
+            for col in 0..<3 {
+                if row == col {
+                    fowardDiagonalWinner.append(ticTacToeState[row][col])
+                }
+            }
+        }
+
+        let fdw = Array(Set(fowardDiagonalWinner))
+        if fdw.count == 1 && fdw.first != .Empty {
+            return fdw.first
+        }
+
+        var backWardDiagonalWinner = [State]()
+        for row in 0..<3 {
+            for col in (0..<3).reverse() {
+                if row + col == 2 {
+                    backWardDiagonalWinner.append(ticTacToeState[row][col])
+                }
+            }
+        }
+        let bdw = Array(Set(backWardDiagonalWinner))
+        if bdw.count == 1 && bdw.first != .Empty {
+            return bdw.first
+        }
+
+        return nil
 
     }
 
