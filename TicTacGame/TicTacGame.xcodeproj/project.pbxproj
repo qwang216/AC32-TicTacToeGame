@@ -11,6 +11,7 @@
 		D491B4521D91C4CA00B3D606 /* GameBoardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D491B4511D91C4CA00B3D606 /* GameBoardController.swift */; };
 		D491B4571D91C4CA00B3D606 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D491B4561D91C4CA00B3D606 /* Assets.xcassets */; };
 		D491B45A1D91C4CA00B3D606 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D491B4581D91C4CA00B3D606 /* LaunchScreen.storyboard */; };
+		D491B4621D92235700B3D606 /* TicTacToe.swift in Sources */ = {isa = PBXBuildFile; fileRef = D491B4611D92235700B3D606 /* TicTacToe.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		D491B4561D91C4CA00B3D606 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D491B4591D91C4CA00B3D606 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D491B45B1D91C4CA00B3D606 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D491B4611D92235700B3D606 /* TicTacToe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TicTacToe.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +56,7 @@
 			children = (
 				D491B44F1D91C4CA00B3D606 /* AppDelegate.swift */,
 				D491B4511D91C4CA00B3D606 /* GameBoardController.swift */,
+				D491B4611D92235700B3D606 /* TicTacToe.swift */,
 				D491B4561D91C4CA00B3D606 /* Assets.xcassets */,
 				D491B4581D91C4CA00B3D606 /* LaunchScreen.storyboard */,
 				D491B45B1D91C4CA00B3D606 /* Info.plist */,
@@ -132,6 +135,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D491B4521D91C4CA00B3D606 /* GameBoardController.swift in Sources */,
+				D491B4621D92235700B3D606 /* TicTacToe.swift in Sources */,
 				D491B4501D91C4CA00B3D606 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -274,6 +278,7 @@
 				D491B4601D91C4CA00B3D606 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
