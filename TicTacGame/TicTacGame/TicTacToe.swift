@@ -142,8 +142,8 @@ class TicTacToe {
         return nil
     }
 
-    func setPlayerMarkOn(position: (Int, Int)) {
-        ticTacToeState[position.0][position.1] = .PlayerOne
+    func setPlayerMarkOn(position: (Int, Int), forPlayer: State) {
+        ticTacToeState[position.0][position.1] = forPlayer
     }
 
     func convertStringToTupleFrom(title: String) -> (Int, Int) {

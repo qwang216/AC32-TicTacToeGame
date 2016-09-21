@@ -20,8 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
 
         let rootVC = GameBoardController()
-        let navController = UINavigationController(rootViewController: rootVC)
-        window?.rootViewController = navController
+        //let navController = UINavigationController(rootViewController: rootVC)
+        window?.rootViewController = rootVC
 
         // Override point for customization after application launch.
         return true
