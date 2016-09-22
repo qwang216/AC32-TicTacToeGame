@@ -70,6 +70,7 @@ class TicTacToe {
 //                }
             }
             guard let playerWinner = checkArrWinner(rowStates) else { continue }
+
             return playerWinner
         }
         return nil
@@ -78,13 +79,16 @@ class TicTacToe {
     private func checkArrWinner(arr: [State]) -> State? {
         let winnerArray = Array(Set(arr))
         if winnerArray.count == 1 {
-            if winnerArray.first == .PlayerOne {
-                return .PlayerOne
-            } else if winnerArray.first == .PlayerTwo {
-                return .PlayerTwo
-            } else {
-                return nil
+            if winnerArray.first != .Empty {
+                return winnerArray.first
             }
+//            if winnerArray.first == .PlayerOne {
+//                return .PlayerOne
+//            } else if winnerArray.first == .PlayerTwo {
+//                return .PlayerTwo
+//            } else {
+//                return nil
+//            }
         }
         return nil
     }
@@ -94,13 +98,14 @@ class TicTacToe {
         for col in 0..<3 {
             var colStates = [State]()
             for row in 0..<3 {
-                if ticTacToeState[row][col] == .PlayerOne {
-                    colStates.append(.PlayerOne)
-                } else if ticTacToeState[row][col] == . PlayerTwo {
-                    colStates.append(.PlayerTwo)
-                } else {
-                    colStates.append(.Empty)
-                }
+                colStates.append(ticTacToeState[row][col])
+//                if ticTacToeState[row][col] == .PlayerOne {
+//                    colStates.append(.PlayerOne)
+//                } else if ticTacToeState[row][col] == . PlayerTwo {
+//                    colStates.append(.PlayerTwo)
+//                } else {
+//                    colStates.append(.Empty)
+//                }
             }
             guard let colWinner = checkArrWinner(colStates) else { continue }
             return colWinner
@@ -118,10 +123,13 @@ class TicTacToe {
             }
         }
 
-        let fdw = Array(Set(fowardDiagonalWinner))
-        if fdw.count == 1 && fdw.first != .Empty {
-            return fdw.first
+        if let fdwName = checkArrWinner(fowardDiagonalWinner) {
+            return fdwName
         }
+//        let fdw = Array(Set(fowardDiagonalWinner))
+//        if fdw.count == 1 && fdw.first != .Empty {
+//            return fdw.first
+//        }
 
         var backWardDiagonalWinner = [State]()
         for row in 0..<3 {
@@ -131,10 +139,15 @@ class TicTacToe {
                 }
             }
         }
-        let bdw = Array(Set(backWardDiagonalWinner))
-        if bdw.count == 1 && bdw.first != .Empty {
-            return bdw.first
+
+        if let bdwName = checkArrWinner(backWardDiagonalWinner) {
+            return bdwName
         }
+//
+//        let bdw = Array(Set(backWardDiagonalWinner))
+//        if bdw.count == 1 && bdw.first != .Empty {
+//            return bdw.first
+//        }
         return nil
     }
 
