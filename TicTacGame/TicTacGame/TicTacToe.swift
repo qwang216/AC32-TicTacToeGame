@@ -115,10 +115,14 @@ class TicTacToe {
 
     private func checkAllDiagonalWinner() -> State? {
         var fowardDiagonalWinner = [State]()
+        var backWardDiagonalWinner = [State]()
         for row in 0..<3 {
             for col in 0..<3 {
                 if row == col {
                     fowardDiagonalWinner.append(ticTacToeState[row][col])
+                }
+                if row + col == 2 {
+                    backWardDiagonalWinner.append(ticTacToeState[row][col])
                 }
             }
         }
@@ -126,29 +130,31 @@ class TicTacToe {
         if let fdwName = checkArrWinner(fowardDiagonalWinner) {
             return fdwName
         }
+
+        if let bdwName = checkArrWinner(backWardDiagonalWinner) {
+            return bdwName
+        }
+        return nil
+
 //        let fdw = Array(Set(fowardDiagonalWinner))
 //        if fdw.count == 1 && fdw.first != .Empty {
 //            return fdw.first
 //        }
 
-        var backWardDiagonalWinner = [State]()
-        for row in 0..<3 {
-            for col in (0..<3).reverse() {
-                if row + col == 2 {
-                    backWardDiagonalWinner.append(ticTacToeState[row][col])
-                }
-            }
-        }
+//        var backWardDiagonalWinner = [State]()
+//        for row in 0..<3 {
+//            for col in 0..<3 {
+//                if row + col == 2 {
+//                    backWardDiagonalWinner.append(ticTacToeState[row][col])
+//                }
+//            }
+//        }
 
-        if let bdwName = checkArrWinner(backWardDiagonalWinner) {
-            return bdwName
-        }
 //
 //        let bdw = Array(Set(backWardDiagonalWinner))
 //        if bdw.count == 1 && bdw.first != .Empty {
 //            return bdw.first
 //        }
-        return nil
     }
 
     func setPlayerMarkOn(position: (Int, Int), forPlayer: State) {
