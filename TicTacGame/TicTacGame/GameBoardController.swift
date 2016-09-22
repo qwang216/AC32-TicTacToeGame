@@ -15,13 +15,6 @@ class GameBoardController: UIViewController {
     let game = TicTacToe()
 
     let resetGameTitleName = "Player1: Red  |  Player2: Green"
-//    let gameTitleLabel: UILabel = {
-//        let label = UILabel()
-//        label.textColor = .blackColor()
-//        label.translatesAutoresizingMaskIntoConstraints = false
-//        label.textAlignment = .Center
-//        return label
-//    }()
 
     let gameTitleLabel: UILabel = {
         let label = UILabel()
