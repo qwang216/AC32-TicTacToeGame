@@ -15,17 +15,25 @@ class GameBoardController: UIViewController {
     let game = TicTacToe()
 
     let resetGameTitleName = "Player1: Red  |  Player2: Green"
-    var gameTitleLabel: UILabel = {
+//    let gameTitleLabel: UILabel = {
+//        let label = UILabel()
+//        label.textColor = .blackColor()
+//        label.translatesAutoresizingMaskIntoConstraints = false
+//        label.textAlignment = .Center
+//        return label
+//    }()
+
+    let gameTitleLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .blackColor()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .Center
         return label
     }()
 
-    var containerView: UIView = {
+    let containerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .greenColor()
         return view
     }()
 
@@ -74,10 +82,7 @@ class GameBoardController: UIViewController {
         view.addSubview(gameTitleLabel)
         gameTitleLabel.text = resetGameTitleName
         gameTitleLabel.bottomAnchor.constraintEqualToAnchor(containerView.topAnchor, constant: -10).active = true
-        gameTitleLabel.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
-        gameTitleLabel.heightAnchor.constraintEqualToConstant(20).active = true
-        gameTitleLabel.leftAnchor.constraintEqualToAnchor(view.leftAnchor, constant: 20).active = true
-        gameTitleLabel.rightAnchor.constraintEqualToAnchor(view.rightAnchor, constant: -20).active = true
+        gameTitleLabel.centerXAnchor.constraintEqualToAnchor(containerView.centerXAnchor).active = true
     }
 
     func setupResetButton() {
@@ -95,15 +100,12 @@ class GameBoardController: UIViewController {
 
     func resetAllButtons(shouldResetButtonColor resetColor: Bool, shouldEnableButton: Bool) {
         for v in containerView.subviews {
-            if let button = v as? UIButton {
-                if let title = button.currentTitle {
-                    if title != resetButtonName {
-                        if resetColor {
-                            button.backgroundColor = .blueColor()
-                        }
-                        button.enabled = shouldEnableButton
-                    }
+            guard let button = v as? UIButton, title = button.currentTitle else { continue }
+            if title != resetButtonName {
+                if resetColor {
+                    button.backgroundColor = .blueColor()
                 }
+                button.enabled = shouldEnableButton
             }
         }
     }
@@ -167,6 +169,4 @@ class GameBoardController: UIViewController {
             resetAllButtons(shouldResetButtonColor: false, shouldEnableButton: false)
         }
     }
-
 }
-
