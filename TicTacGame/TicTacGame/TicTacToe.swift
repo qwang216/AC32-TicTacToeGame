@@ -17,11 +17,16 @@ class TicTacToe {
     }
 
     var ticTacToeState = [[State]]()
+    let gameSize: Int
+
+    init(gameSize: Int) {
+        self.gameSize = gameSize
+    }
 
     func resetGameState() {
         ticTacToeState.removeAll()
-        for _ in 0..<3 {
-            let row = Array(count: 3, repeatedValue: State.Empty)
+        for _ in 0..<gameSize {
+            let row = Array(count: gameSize, repeatedValue: State.Empty)
             ticTacToeState.append(row)
         }
     }
@@ -57,9 +62,9 @@ class TicTacToe {
     }
 
     private func checkAllRowWinner() -> State? {
-        for row in 0..<3 {
+        for row in 0..<gameSize {
             var rowStates = [State]()
-            for col in 0..<3 {
+            for col in 0..<gameSize {
                 rowStates.append(ticTacToeState[row][col])
             }
             guard let playerWinner = checkArrWinner(rowStates) else { continue }
@@ -81,9 +86,9 @@ class TicTacToe {
 
 
     private func checkAllColWinner() -> State? {
-        for col in 0..<3 {
+        for col in 0..<gameSize {
             var colStates = [State]()
-            for row in 0..<3 {
+            for row in 0..<gameSize {
                 colStates.append(ticTacToeState[row][col])
             }
             guard let colWinner = checkArrWinner(colStates) else { continue }
@@ -95,12 +100,12 @@ class TicTacToe {
     private func checkAllDiagonalWinner() -> State? {
         var fowardDiagonalWinner = [State]()
         var backWardDiagonalWinner = [State]()
-        for row in 0..<3 {
-            for col in 0..<3 {
+        for row in 0..<gameSize {
+            for col in 0..<gameSize {
                 if row == col {
                     fowardDiagonalWinner.append(ticTacToeState[row][col])
                 }
-                if row + col == 2 {
+                if row + col == (gameSize - 1) {
                     backWardDiagonalWinner.append(ticTacToeState[row][col])
                 }
             }

@@ -12,7 +12,7 @@ class GameBoardController: UIViewController {
 
     var isPlayerOne = true
 
-    let game = TicTacToe()
+    let game = TicTacToe(gameSize: 3)
 
     let resetGameTitleName = "Player1: Red  |  Player2: Green"
 
@@ -26,7 +26,6 @@ class GameBoardController: UIViewController {
     let containerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .greenColor()
         return view
     }()
 
@@ -93,7 +92,7 @@ class GameBoardController: UIViewController {
 
     func resetAllButtons(shouldResetButtonColor resetColor: Bool, shouldEnableButton: Bool) {
         for v in containerView.subviews {
-            guard let button = v as? UIButton, title = button.currentTitle else { continue }
+            guard let button = v as? UIButton, let title = button.currentTitle else { continue }
             if title != resetButtonName {
                 if resetColor {
                     button.backgroundColor = .blueColor()
