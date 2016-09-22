@@ -24,7 +24,6 @@ class TicTacToe {
             let row = Array(count: 3, repeatedValue: State.Empty)
             ticTacToeState.append(row)
         }
-
     }
 
     func checkForWinner() -> String? {
@@ -54,10 +53,6 @@ class TicTacToe {
                 winnerName = "Winner: Player Two"
             }
         }
-//        if let player = winnerName {
-//            gameTitleLabel?.text = player
-//            resetAllButtons(color: false, shouldEnableButton: false)
-//        }
         return winnerName
     }
 
@@ -65,13 +60,14 @@ class TicTacToe {
         for row in 0..<3 {
             var rowStates = [State]()
             for col in 0..<3 {
-                if ticTacToeState[row][col] == .PlayerOne {
-                    rowStates.append(.PlayerOne)
-                } else if ticTacToeState[row][col] == .PlayerTwo {
-                    rowStates.append(.PlayerTwo)
-                } else {
-                    rowStates.append(.Empty)
-                }
+                rowStates.append(ticTacToeState[row][col])
+//                if ticTacToeState[row][col] == .PlayerOne {
+//                    rowStates.append(.PlayerOne)
+//                } else if ticTacToeState[row][col] == .PlayerTwo {
+//                    rowStates.append(.PlayerTwo)
+//                } else {
+//                    rowStates.append(.Empty)
+//                }
             }
             guard let playerWinner = checkArrWinner(rowStates) else { continue }
             return playerWinner
